@@ -1,0 +1,36 @@
+{
+  "agencias": 
+  [
+    {
+        "id": 1,
+        "name": "Ibarra",
+        "route": "30",
+        "backup": "5",
+        "sim": "30"
+    },
+    {
+      "id": 2,
+      "name": "Guayaquil Norte",
+      "route": "40",
+      "backup": "4",
+      "sim": "44"
+    }
+  ],
+  "funcionario": 
+  [
+    {
+        "id": 1,
+        "name": "Ibarra",
+        "route": "30",
+        "backup": "5",
+        "sim": "30"
+    },
+    {
+      "id": 2,
+      "name": "Guayaquil Norte",
+      "route": "40",
+      "backup": "4",
+      "sim": "44"
+    }
+  ]
+}
