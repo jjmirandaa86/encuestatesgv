@@ -33,10 +33,10 @@ export default class Cabecera extends Component {
           <tbody>
             <tr>
               <FilaTabla
-                agencia="Guayaquil"
-                e_ruta="323"
-                e_backups="34"
-                e_sim="370"
+                agencia="Guayaquil Norte"
+                e_ruta="60"
+                e_backups="6"
+                e_sim="66"
               />
             </tr>
             <tr>
@@ -45,6 +45,14 @@ export default class Cabecera extends Component {
                 e_ruta="18"
                 e_backups="2"
                 e_sim="20"
+              />
+            </tr>
+            <tr>
+              <FilaTabla
+                agencia="Guayaquil Sur"
+                e_ruta="55"
+                e_backups="6"
+                e_sim="61"
               />
             </tr>
           </tbody>
