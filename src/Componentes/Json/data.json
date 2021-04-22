@@ -22,7 +22,7 @@
   "novedad.titulo.observacion": "Observación:",
   "novedad.titulo.calificacion": "Calificación general:",
 
-  "color_fondo": "primary",
+  "color_fondo": "success",
   "color_fondo_tabla": "light",
   "color_letra": "dark",
   "tamano_titulo": "h2",

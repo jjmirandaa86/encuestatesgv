@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import Badge from "react-bootstrap/Badge";
-import AutosizeInput from "react-input-autosize";
-
-import "./example.less";
 
 export default class FilaTabla extends Component {
   constructor(props) {
@@ -80,13 +77,6 @@ export default class FilaTabla extends Component {
             <h7>{this.props.e_sim}</h7>
           </Badge>{" "}
         </td>
-
-        <AutosizeInput
-          value={this.state.rutas}
-          type="number"
-          onChange={this.handleChange}
-          size={10}
-        />
       </>
     );
   }

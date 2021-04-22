@@ -10,24 +10,21 @@ export default class Usuario extends Component {
   static c_datoCargos = [];
   static c_datoFuncionario = [];
 
+  static o_datoCargos = new Object();
+  static o_datoFuncionario = new Object();
+
   constructor(props) {
     super(props);
-
-    this.datoFuncionarios = new Map(
+    this.c_datoCargos = new Map(
       data.funcionarios.map((el) => {
-        return [
-          el.id,
-          el.name,
-          el.position,
-          el.short_position,
-          el.correo,
-          el.agencias,
-        ];
+        return [el.short_position, el.id];
       })
     );
-    console.log(typeof this.datoFuncionarios);
-    console.log("typeof this.datoFuncionarios");
+    o_datoCargos = c_datoCargos
+
     //Carga valores unicos en el combo cargo, haciendo una agrupacion por el campo short_position
+
+    /*
     let personasMap = this.datoFuncionarios.map((el) => {
       return [el.short_position, el];
     });
@@ -35,6 +32,7 @@ export default class Usuario extends Component {
     this.datoCargos = [...personasMapArr.values()]; // Conversión a un array
     ordenarAsc(this.datoCargos, "short_position"); //Ordena ascendentemente
     console.log(this.datoCargos);
+    */
   }
 
   render(props) {
@@ -51,18 +49,27 @@ export default class Usuario extends Component {
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Cargo: </Form.Label>
           <Form.Control as="select" onChange={this.onChangeCargo}>
-            {this.c_datoCargos.map((el) => (
-              <option>{el.short_position}</option>
+            {data.funcionarios.map((el) => (
+              <li key={el}>{el.short_position}</li> // siempre necesita un KEY
             ))}
+            {data.funcionarios.map((el) => {
+              console.log("hola mundo");
+              console.log(el + el.short_position);
+              <option>{el.short_position}</option>;
+            })}
           </Form.Control>
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Funcionario: </Form.Label>
           <Form.Control as="select">
-            {this.c_datoFuncionario.map((el) => (
-              <option>{el.name}</option>
-            ))}
+            {/*
+              
+              this.c_datoFuncionario.map((el) => (
+                <option>{el.name}</option>
+              ))
+              */}
+            }
           </Form.Control>
         </Form.Group>
       </>
@@ -71,6 +78,14 @@ export default class Usuario extends Component {
 
   onChangeCargo() {
     console.log("se cambio el valor de cargo");
+    /*
+    var filtrado = data.funcionarios.filter(function (v) {
+      return v.short_position == "COS";
+    });
+    console.log(filtrado);
+    */
+
+    /*
     let funcionariosMap = data.funcionarios.map((el) => {
       return [el.name, el];
     });
@@ -79,7 +94,7 @@ export default class Usuario extends Component {
     //console.log(document.getElementsByClassName("comboCargo"));
     //Carga valores unicos dependiendo del cargo
 
-    /*
+    
     let datoFuncionarios = data.funcionarios.map((el) => {
       return [el.short_position, el, el.name];
     });
