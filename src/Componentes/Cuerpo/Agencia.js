@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
 import Alert from "react-bootstrap/Alert";
 import FilaTabla from "../Cuerpo/FilaTabla";
+import data from "../Json/data.json";
 
-export default class Cabecera extends Component {
-  render() {
+export default class Agencia extends Component {
+  render(props) {
     return (
       <>
         <Alert

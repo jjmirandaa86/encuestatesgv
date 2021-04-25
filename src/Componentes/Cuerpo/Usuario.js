@@ -1,41 +1,56 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
+import Agencia from "../../Componentes/Cuerpo/Agencia";
 import data from "../Json/data.json";
 
 export default class Usuario extends Component {
-  //All funcionarios
-  static datoFuncionarios = [];
-  //Combos
-  static c_datoCargos = [];
-  static c_datoFuncionario = [];
-
-  static o_datoCargos = new Object();
-  static o_datoFuncionario = new Object();
-
   constructor(props) {
+    console.log("constructor");
     super(props);
-    this.c_datoCargos = new Map(
-      data.funcionarios.map((el) => {
-        return [el.short_position, el.id];
-      })
-    );
-    o_datoCargos = c_datoCargos
+    this.state = {
+      comboCargo: "",
+      comboFuncionario: [],
+      comboAgencia: [],
+    };
 
-    //Carga valores unicos en el combo cargo, haciendo una agrupacion por el campo short_position
+    this.cambioCargo = this.cambioCargo.bind(this);
+    this.cambioFuncionario = this.cambioFuncionario.bind(this);
+    this.cambioAgencia = this.cambioAgencia.bind(this);
+  }
 
-    /*
-    let personasMap = this.datoFuncionarios.map((el) => {
-      return [el.short_position, el];
+  cambioCargo(e) {
+    console.log("========================================");
+    console.log("Funcion de clase -> cambioCargo(e)");
+    console.log("   -> " + e.target.value);
+    this.setState({
+      comboCargo: e.target.value,
     });
-    var personasMapArr = new Map(personasMap); // Pares de clave y valor
-    this.datoCargos = [...personasMapArr.values()]; // Conversión a un array
-    ordenarAsc(this.datoCargos, "short_position"); //Ordena ascendentemente
-    console.log(this.datoCargos);
-    */
+    this.setState({
+      comboFuncionario: cambioCargo(e.target.value),
+    });
+  }
+
+  cambioFuncionario(e) {
+    console.log("Funcion de clase -> cambioFuncionario(e)");
+    console.log("   -> " + e.target.value);
+  }
+
+  cambioAgencia(e) {
+    console.log("Funcion de clase -> cambioAgencia(e)");
+    console.log("   -> " + e.target.value);
+    this.setState({
+      comboAgencia: buscaAgencia(e.target.value),
+    });
+    console.log(this.state.comboAgencia);
+  }
+
+  componentDidUpdate(e) {
+    console.log("Funcion de clase -> componentDidUpdate(e)");
   }
 
   render(props) {
+    console.log("Funcion de clase -> render(props)");
     return (
       <>
         <Alert
@@ -46,74 +61,66 @@ export default class Usuario extends Component {
             Datos del funcionario:
           </Alert.Heading>
         </Alert>
-        <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Group controlId="usuarioCargo">
           <Form.Label>Cargo: </Form.Label>
-          <Form.Control as="select" onChange={this.onChangeCargo}>
-            {data.funcionarios.map((el) => (
-              <li key={el}>{el.short_position}</li> // siempre necesita un KEY
-            ))}
-            {data.funcionarios.map((el) => {
-              console.log("hola mundo");
-              console.log(el + el.short_position);
-              <option>{el.short_position}</option>;
-            })}
+          <Form.Control
+            as="select"
+            value={this.state.comboCargo}
+            onChange={this.cambioCargo}
+          >
+            <option></option>
+            <option value="COS">COS</option>
+            <option value="JRV">JRV</option>
+            <option value="GV">GV</option>
           </Form.Control>
         </Form.Group>
-
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Funcionario: </Form.Label>
           <Form.Control as="select">
-            {/*
-              
-              this.c_datoFuncionario.map((el) => (
-                <option>{el.name}</option>
-              ))
-              */}
-            }
+            {this.state.comboFuncionario.map((el) => (
+              <option>{el.name}</option>
+            ))}
           </Form.Control>
         </Form.Group>
+        <Agencia
+          color_fondo={this.props.color_fondo}
+          color_fondo_tabla={this.props.color_fondo_tabla}
+          color_letra={this.props.color_letra}
+          tamano_titulo={this.props.tamano_titulo}
+          tamano_subtitulo={this.props.tamano_subtitulo}
+          arrayAgencias={this.state.comboAgencia}
+        />
       </>
     );
   }
+}
 
-  onChangeCargo() {
-    console.log("se cambio el valor de cargo");
-    /*
-    var filtrado = data.funcionarios.filter(function (v) {
-      return v.short_position == "COS";
-    });
-    console.log(filtrado);
-    */
-
-    /*
-    let funcionariosMap = data.funcionarios.map((el) => {
-      return [el.name, el];
-    });
-    this.datoFuncionarios = filtraJson(funcionariosMap, "short_position", "GV");
-    console.log(this.datoFuncionarios);
-    //console.log(document.getElementsByClassName("comboCargo"));
-    //Carga valores unicos dependiendo del cargo
-
-    
-    let datoFuncionarios = data.funcionarios.map((el) => {
-      return [el.short_position, el, el.name];
-    });
-    console.console.log(datoFuncionarios);
-    var personasMapArr = new Map(personasMap); // Pares de clave y valor
-    this.datoFuncionarios = [...personasMapArr.values()]; // Conversión a un array
-    */
+function cambioCargo(valorFiltro) {
+  console.log("Funcion -> cambioCargo(valorFiltro)");
+  console.log("   -> " + valorFiltro);
+  let res = [];
+  if (valorFiltro != "") {
+    console.log(
+      "Funcion -> cambioCargo(valorFiltro) -> Filter: " + valorFiltro
+    );
+    res = data.funcionarios.filter((it) =>
+      it.short_position.includes(valorFiltro)
+    );
+    console.log(res);
   }
+  return res;
 }
 
-function ordenarAsc(p_array_json, p_key) {
-  p_array_json.sort(function (a, b) {
-    return a[p_key] > b[p_key];
-  });
-}
-
-function filtraJson(p_array_json, p_key, p_value) {
-  console.log("entro");
-  return p_array_json.filter(function (e) {
-    return e[p_key] == p_value;
-  });
+function buscaAgencia(valorFiltro) {
+  console.log("Funcion -> buscaAgencia(valorFiltro)");
+  console.log("   -> " + valorFiltro);
+  let res = [];
+  if (valorFiltro != "") {
+    console.log("busca las agencia que tiene el funcionario");
+    console.log("Filter Agencias: " + valorFiltro);
+    res = data.agencias.filter((it) => it.id.includes(valorFiltro));
+    console.log(res);
+    console.log("Fin Filter Agencias");
+  }
+  return res;
 }

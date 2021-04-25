@@ -132,11 +132,19 @@
     },
     {
       "id": 7,
-      "name": "Julio Ampuño",
-      "position": "Jefe de proyectos",
-      "short_position": "IT",
-      "correo": "jampuno@cbc.co",
-      "agencias": [7]
+      "name": "Evelio Bastardo",
+      "position": "Jefe regional de ventas Guayaquil Norte",
+      "short_position": "JRV",
+      "correo": "ebastardo@cbc.co",
+      "agencias": [2]
+    },
+    {
+      "id": 8,
+      "name": "Victor Vidal",
+      "position": "Jefe regional de ventas Ambato",
+      "short_position": "JRV",
+      "correo": "vvidal@cbc.co",
+      "agencias": [1]
     }
   ]
 }
