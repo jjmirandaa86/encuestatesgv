@@ -5,9 +5,9 @@ export default class FilaTabla extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ruta: "",
-      backup: "",
-      sim: "",
+      ruta: this.props.e_ruta,
+      backup: this.props.e_backups,
+      sim: this.props.e_sim,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -20,19 +20,6 @@ export default class FilaTabla extends Component {
       [name]: value,
     });
   }
-
-  componentDidMount(props) {
-    /* this.setState({
-      ruta: this.props.agencia,
-    });
-    */
-  }
-
-  updateInputValue = (input, event) => {
-    const newState = {};
-    newState[input] = event.target.value;
-    this.setState(newState);
-  };
 
   render(props) {
     return (

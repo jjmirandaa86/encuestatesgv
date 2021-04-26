@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
+import Table from "react-bootstrap/Table";
 import Agencia from "../../Componentes/Cuerpo/Agencia";
+import FilaTabla from "../Cuerpo/FilaTabla";
 import data from "../Json/data.json";
 
 export default class Usuario extends Component {
@@ -11,7 +13,7 @@ export default class Usuario extends Component {
     this.state = {
       comboCargo: "",
       comboFuncionario: [],
-      comboAgencia: [],
+      comboAgencia: [1, 2],
     };
 
     this.cambioCargo = this.cambioCargo.bind(this);
@@ -29,6 +31,7 @@ export default class Usuario extends Component {
     this.setState({
       comboFuncionario: cambioCargo(e.target.value),
     });
+    onChangeFuncionario();
   }
 
   cambioFuncionario(e) {
@@ -38,15 +41,14 @@ export default class Usuario extends Component {
 
   cambioAgencia(e) {
     console.log("Funcion de clase -> cambioAgencia(e)");
-    console.log("   -> " + e.target.value);
-    this.setState({
-      comboAgencia: buscaAgencia(e.target.value),
-    });
-    console.log(this.state.comboAgencia);
+    console.log("   -> ");
   }
 
   componentDidUpdate(e) {
     console.log("Funcion de clase -> componentDidUpdate(e)");
+    this.cambioAgencia(
+      buscaAgenciasXUsuario(document.getElementById("valorFuncionario").value)
+    );
   }
 
   render(props) {
@@ -61,7 +63,7 @@ export default class Usuario extends Component {
             Datos del funcionario:
           </Alert.Heading>
         </Alert>
-        <Form.Group controlId="usuarioCargo">
+        <Form.Group controlId="valorCargo" class="valorCargo">
           <Form.Label>Cargo: </Form.Label>
           <Form.Control
             as="select"
@@ -74,21 +76,20 @@ export default class Usuario extends Component {
             <option value="GV">GV</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Group controlId="valorFuncionario" class="valorFuncionario">
           <Form.Label>Funcionario: </Form.Label>
-          <Form.Control as="select">
+          <Form.Control as="select" onChange={onChangeFuncionario}>
             {this.state.comboFuncionario.map((el) => (
-              <option>{el.name}</option>
+              <option value={el.correo}>{el.name}</option>
             ))}
           </Form.Control>
         </Form.Group>
-        <Agencia
+        <Grid
           color_fondo={this.props.color_fondo}
           color_fondo_tabla={this.props.color_fondo_tabla}
           color_letra={this.props.color_letra}
           tamano_titulo={this.props.tamano_titulo}
           tamano_subtitulo={this.props.tamano_subtitulo}
-          arrayAgencias={this.state.comboAgencia}
         />
       </>
     );
@@ -111,16 +112,61 @@ function cambioCargo(valorFiltro) {
   return res;
 }
 
-function buscaAgencia(valorFiltro) {
-  console.log("Funcion -> buscaAgencia(valorFiltro)");
+function buscaAgenciasXUsuario(valorFiltro) {
+  console.log("Funcion -> buscaAgenciasXUsuario()");
   console.log("   -> " + valorFiltro);
   let res = [];
   if (valorFiltro != "") {
-    console.log("busca las agencia que tiene el funcionario");
-    console.log("Filter Agencias: " + valorFiltro);
-    res = data.agencias.filter((it) => it.id.includes(valorFiltro));
+    res = data.funcionarios.filter((it) => it.correo.includes(valorFiltro));
     console.log(res);
-    console.log("Fin Filter Agencias");
   }
   return res;
+}
+
+function onChangeFuncionario() {
+  console.log("Funcion -> onChangeFuncionario()");
+  buscaAgenciasXUsuario(document.getElementById("valorFuncionario").value);
+}
+
+function Grid(props) {
+  return (
+    <>
+      <Alert
+        variant={props.color_fondo}
+        text={props.color_fondo === "light" ? "dark" : "white"}
+      >
+        <Alert.Heading as={props.tamano_titulo}>
+          Disponibilidad Smartphone EV's:
+        </Alert.Heading>
+      </Alert>
+      <Table
+        striped
+        bordered
+        hover
+        responsive
+        variant={props.color_fondo_tabla}
+      >
+        <thead>
+          <tr>
+            <th>Agencia</th>
+            <th>Ruta</th>
+            <th>Backup</th>
+            <th>Chip</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.agencias.map((el) => (
+            <tr>
+              <FilaTabla
+                agencia={el.name}
+                e_ruta={el.route}
+                e_backups={el.backup}
+                e_sim={el.sim}
+              />
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </>
+  );
 }

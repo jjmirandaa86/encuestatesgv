@@ -6,6 +6,9 @@ import data from "../Json/data.json";
 
 export default class Agencia extends Component {
   render(props) {
+    console.log("========>>>>>");
+    console.log(this.props.arrayAgencias);
+    console.log("========>>>>>");
     return (
       <>
         <Alert
@@ -32,30 +35,16 @@ export default class Agencia extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <FilaTabla
-                agencia="Guayaquil Norte"
-                e_ruta="60"
-                e_backups="6"
-                e_sim="66"
-              />
-            </tr>
-            <tr>
-              <FilaTabla
-                agencia="Salinas"
-                e_ruta="18"
-                e_backups="2"
-                e_sim="20"
-              />
-            </tr>
-            <tr>
-              <FilaTabla
-                agencia="Guayaquil Sur"
-                e_ruta="55"
-                e_backups="6"
-                e_sim="61"
-              />
-            </tr>
+            {data.agencias.map((el) => (
+              <tr>
+                <FilaTabla
+                  agencia={el.name}
+                  e_ruta={el.route}
+                  e_backups={el.backup}
+                  e_sim={el.sim}
+                />
+              </tr>
+            ))}
           </tbody>
         </Table>
       </>
