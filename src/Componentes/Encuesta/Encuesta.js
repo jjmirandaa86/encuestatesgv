@@ -21,6 +21,9 @@ export default class Encuesta extends Component {
               disponible_mensaje={data.disponible_mensaje}
               disponible_contacto={data.disponible_contacto}
               disponible_fecha={data.disponible_fecha}
+              logo_alt={data.logo_alt}
+              logo_ancho={data.logo_ancho}
+              logo_alto={data.logo_alto}
             />
           </Col>
         </Row>

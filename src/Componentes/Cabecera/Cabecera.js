@@ -6,7 +6,11 @@ export default class Cabecera extends Component {
   render(props) {
     return (
       <>
-        <Logo alt="Logo corporativo de tesalia Cbc" ancho="300" alto="120" />
+        <Logo
+          logo_alt={this.props.logo_alt}
+          logo_ancho={this.props.logo_ancho}
+          logo_alto={this.props.logo_alto}
+        />
         <br />
         <Titulo
           color_fondo={this.props.color_fondo}

@@ -10,9 +10,9 @@ export default class Logo extends Component {
           <Col xs="auto" sm="auto" md="auto" lg="auto" xl="auto">
             <img
               src={logo}
-              alt={this.props.alt}
-              height={this.props.alto}
-              width={this.props.ancho}
+              alt={this.props.logo_alt}
+              height={this.props.logo_alto}
+              width={this.props.logo_ancho}
             />
           </Col>
         </Row>
