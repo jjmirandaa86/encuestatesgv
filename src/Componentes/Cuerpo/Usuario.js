@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Table from "react-bootstrap/Table";
-import Agencia from "../../Componentes/Cuerpo/Agencia";
 import FilaTabla from "../Cuerpo/FilaTabla";
 import data from "../Json/data.json";
 
@@ -14,11 +13,14 @@ export default class Usuario extends Component {
       comboCargo: "",
       comboFuncionario: [],
       comboAgencia: [1, 2],
+      statusGrid: false,
     };
 
     this.cambioCargo = this.cambioCargo.bind(this);
     this.cambioFuncionario = this.cambioFuncionario.bind(this);
     this.cambioAgencia = this.cambioAgencia.bind(this);
+
+    console.log(prueba());
   }
 
   cambioCargo(e) {
@@ -27,10 +29,10 @@ export default class Usuario extends Component {
     console.log("   -> " + e.target.value);
     this.setState({
       comboCargo: e.target.value,
-    });
-    this.setState({
       comboFuncionario: cambioCargo(e.target.value),
+      statusGrid: true, //cambio el valor para mostrar el grid
     });
+
     onChangeFuncionario();
   }
 
@@ -84,13 +86,18 @@ export default class Usuario extends Component {
             ))}
           </Form.Control>
         </Form.Group>
-        <Grid
-          color_fondo={this.props.color_fondo}
-          color_fondo_tabla={this.props.color_fondo_tabla}
-          color_letra={this.props.color_letra}
-          tamano_titulo={this.props.tamano_titulo}
-          tamano_subtitulo={this.props.tamano_subtitulo}
-        />
+        {this.state.statusGrid ? (
+          <Grid
+            color_fondo={this.props.color_fondo}
+            color_fondo_tabla={this.props.color_fondo_tabla}
+            color_letra={this.props.color_letra}
+            tamano_titulo={this.props.tamano_titulo}
+            tamano_subtitulo={this.props.tamano_subtitulo}
+            varDatoEnviado={[prueba]}
+          />
+        ) : (
+          <></>
+        )}
       </>
     );
   }
@@ -129,6 +136,7 @@ function onChangeFuncionario() {
 }
 
 function Grid(props) {
+  const varDato = props.varDatoEnviado;
   return (
     <>
       <Alert
@@ -155,7 +163,7 @@ function Grid(props) {
           </tr>
         </thead>
         <tbody>
-          {data.agencias.map((el) => (
+          {varDato.map((el) => (
             <tr>
               <FilaTabla
                 agencia={el.name}
@@ -169,4 +177,41 @@ function Grid(props) {
       </Table>
     </>
   );
+}
+
+function prueba() {
+  const varBuscar = [1, 3];
+  const varArreglo = [
+    {
+      idAgencia: 1,
+      name: "Ambato",
+      route: 30,
+      backup: 5,
+      sim: 30,
+    },
+    {
+      idAgencia: 2,
+      name: "Guayaquil Norte",
+      route: 40,
+      backup: 4,
+      sim: 44,
+    },
+    {
+      idAgencia: 3,
+      name: "Guayaquil Sur",
+      route: 50,
+      backup: 5,
+      sim: 55,
+    },
+  ];
+
+  console.log("Valores a validar: " + varBuscar.length);
+  let arrayAgencias = varArreglo.filter((vectorResultado) => {
+    console.log(vectorResultado.idAgencia + " - " + vectorResultado.name);
+    if (!varBuscar.includes(vectorResultado.idAgencia)) return false;
+    // Si no se pudo dividir por ninguno de los de arriba, sí es primo
+    return vectorResultado;
+  });
+  console.log(arrayAgencias);
+  return arrayAgencias;
 }
