@@ -16,12 +16,14 @@ export default class Otros extends Component {
           </Alert.Heading>
         </Alert>
         <Container>
-          <Form.Group controlId="formGridAddress1">
+          <Form.Group controlId="valorObservacion" class="valorObservacion">
             <Form.Label>Observación:</Form.Label>
             <Form.Control placeholder="Escribe las observaciones que tengas para mejorar el servicio y/o alguna novedad." />
           </Form.Group>
-          <label>Calificación general:</label>
+          <label>Calificación general: *</label>
           <BeautyStars
+            controlId="valorEstrellas"
+            class="valorEstrellas"
             value={this.state.value}
             onChange={(value) => this.setState({ value })}
           />

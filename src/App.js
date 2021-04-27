@@ -9,7 +9,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         {data.disponible ? <Encuesta /> : <NoDisponible />}
-        <Prueba />
+        {
+          //<Prueba />
+        }
       </header>
     </div>
   );

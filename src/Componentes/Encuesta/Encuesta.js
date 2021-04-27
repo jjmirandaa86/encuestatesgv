@@ -35,6 +35,8 @@ export default class Encuesta extends Component {
               color_letra={data.color_letra}
               tamano_titulo={data.tamano_titulo}
               tamano_subtitulo={data.tamano_subtitulo}
+              datos_funcionarios={data.funcionarios}
+              datos_agencias={data.agencias}
             />
           </Col>
         </Row>

@@ -148,6 +148,14 @@
       "short_position": "JRV",
       "correo": "vvidal@cbc.co",
       "agencias": [1]
+    },
+    {
+      "idFuncionario": 9,
+      "name": "Jefferson Miranda",
+      "position": "Tecnologia",
+      "short_position": "IT",
+      "correo": "jmiranda@cbc.co",
+      "agencias": [1,2,3,4,5,6,7]
     }
   ]
 }
