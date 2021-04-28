@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Cargo from "../../Componentes/Cuerpo/Cargo";
-import Grid from "../../Componentes/Cuerpo/Grid";
 import Otros from "../../Componentes/Cuerpo/Otros";
-import Funcionario from "../../Componentes/Cuerpo/Funcionario";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Grid from "../../Componentes/Cuerpo/Grid";
 
 export default class Cuerpo extends Component {
   render(props) {
+    console.log("Cuerpo -> ========= render ============");
     return (
       <>
         <form onSubmit={this.handleSubmit}>
@@ -19,20 +19,13 @@ export default class Cuerpo extends Component {
               Datos del funcionario:
             </Alert.Heading>
           </Alert>
-          <Cargo datos_funcionario={this.props.datos_funcionarios} />
-          <Funcionario
+          <label>{this.state.saludo}</label>
+          <Cargo
+            handler={this.handler}
             datos_funcionario={this.props.datos_funcionarios}
-            dato_Cargo={"GV"}
-          />
-          <Grid
-            color_fondo={this.props.color_fondo}
-            color_fondo_tabla={this.props.color_fondo_tabla}
-            color_letra={this.props.color_letra}
-            tamano_titulo={this.props.tamano_titulo}
-            tamano_subtitulo={this.props.tamano_subtitulo}
             datos_agencias={this.props.datos_agencias}
-            agencia_funcionario={[3, 2]}
           />
+
           <Otros
             color_fondo={this.props.color_fondo}
             color_fondo_tabla={this.props.color_fondo_tabla}
@@ -49,7 +42,22 @@ export default class Cuerpo extends Component {
     );
   }
 
-  guardar() {
+  constructor(props) {
+    console.log("Cuerpo -> ========= Constructor ============");
+    super(props);
+    this.state = {
+      saludo: "",
+    };
+  }
+
+  handler = (param) => {
+    this.setState({
+      saludo: param,
+    });
+  };
+
+  guardar(e) {
+    console.log("Cuerpo -> ========= guardar ============");
     console.log("Hola mundo");
     console.log(document.getElementById("valorCargo").value);
     console.log(document.getElementById("valorFuncionario").value);
@@ -58,6 +66,7 @@ export default class Cuerpo extends Component {
   }
 
   cargo(e) {
+    console.log("Cuerpo -> ========= cargo ============");
     const cargo = document.getElementById("valorCargo").value;
     return cargo;
   }

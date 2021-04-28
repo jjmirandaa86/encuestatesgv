@@ -5,6 +5,11 @@ import FilaTabla from "../Cuerpo/FilaTabla";
 
 export default class Grid extends Component {
   render(props) {
+    console.log("MANDO A LLAMAR A GRID");
+    console.log("MANDO A LLAMAR A GRID");
+    console.log("MANDO A LLAMAR A GRID");
+    console.log("MANDO A LLAMAR A GRID");
+    console.log(this.props.agencia_funcionario);
     return (
       <>
         <Alert
@@ -32,7 +37,7 @@ export default class Grid extends Component {
           </thead>
           <tbody>
             {this.state.dataAgencias.map((el) => (
-              <tr>
+              <tr key={el.name}>
                 <FilaTabla
                   agencia={el.name}
                   e_ruta={el.route}
@@ -61,6 +66,15 @@ export default class Grid extends Component {
 
   metodoGrid(e) {
     console.log("Grid -> =========== metodoGrid ============");
+  }
+
+  componentDidUpdate(e) {
+    this.state = {
+      dataAgencias: this.extraeAgenciasXFuncionario(
+        this.props.datos_agencias,
+        this.props.agencia_funcionario
+      ),
+    };
   }
 
   extraeAgenciasXFuncionario(datos_agencias, agencia_funcionario) {

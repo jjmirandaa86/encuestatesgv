@@ -87,11 +87,11 @@
   [
     {
         "idFuncionario": 1,
-        "name": "David Nava",
-        "position": "Gerente de Ventas Guayaquil",
+        "name": "Francisco Avalos",
+        "position": "Gerente de Ventas Costa",
         "short_position": "GV",
-        "correo": "dnava@cbc.co",
-        "agencias": [1, 2]
+        "correo": "favalos@cbc.co",
+        "agencias": [1, 2, 3, 4, 5]
     },
     {
         "idFuncionario": 2,
@@ -156,6 +156,23 @@
       "short_position": "IT",
       "correo": "jmiranda@cbc.co",
       "agencias": [1,2,3,4,5,6,7]
+    }
+    ,
+    {
+      "idFuncionario": 10,
+      "name": "Julio Ampuño",
+      "position": "Tecnologia",
+      "short_position": "IT",
+      "correo": "jampuno@cbc.co",
+      "agencias": [1,2]
+    },
+    {
+      "idFuncionario": 11,
+      "name": "Jose Lara",
+      "position": "Tecnologia",
+      "short_position": "IT",
+      "correo": "jalara@cbc.co",
+      "agencias": [5,6,7]
     }
   ]
 }
