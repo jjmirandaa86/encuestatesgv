@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import data from "../Componentes/Json/data.json";
+import data from "../Json/data.json";
 
 export default class Prueba extends Component {
   render(props) {

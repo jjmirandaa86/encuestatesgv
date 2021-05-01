@@ -8,6 +8,10 @@ import Grid from "../../Componentes/Cuerpo/Grid";
 export default class Cuerpo extends Component {
   render(props) {
     console.log("Cuerpo -> ========= render ============");
+    console.log("Valores recibidos de Encuesta");
+    console.log(this.props.datos_funcionarios);
+    console.log(this.props.datos_agencias);
+
     return (
       <>
         <form onSubmit={this.handleSubmit}>
@@ -19,10 +23,9 @@ export default class Cuerpo extends Component {
               Datos del funcionario:
             </Alert.Heading>
           </Alert>
-          <label>{this.state.saludo}</label>
           <Cargo
             handler={this.handler}
-            datos_funcionario={this.props.datos_funcionarios}
+            datos_funcionarios={this.props.datos_funcionarios}
             datos_agencias={this.props.datos_agencias}
           />
 
@@ -45,16 +48,7 @@ export default class Cuerpo extends Component {
   constructor(props) {
     console.log("Cuerpo -> ========= Constructor ============");
     super(props);
-    this.state = {
-      saludo: "",
-    };
   }
-
-  handler = (param) => {
-    this.setState({
-      saludo: param,
-    });
-  };
 
   guardar(e) {
     console.log("Cuerpo -> ========= guardar ============");

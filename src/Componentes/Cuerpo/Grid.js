@@ -56,10 +56,7 @@ export default class Grid extends Component {
     console.log("Grid -> ========= Constructor ============");
     super(props);
     this.state = {
-      dataAgencias: this.extraeAgenciasXFuncionario(
-        this.props.datos_agencias,
-        this.props.agencia_funcionario
-      ),
+      dataAgencias: {}, // this.extraeAgenciasXFuncionario( this.props.datos_agencias, this.props.agencia_funcionario ),
     };
     this.metodoGrid = this.metodoGrid.bind(this);
   }

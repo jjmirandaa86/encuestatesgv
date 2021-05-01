@@ -1,7 +1,8 @@
+/*
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
 import Alert from "react-bootstrap/Alert";
-import FilaTabla from "../Cuerpo/FilaTabla";
+import FilaTabla from "./FilaTabla";
 import data from "../Json/data.json";
 
 export default class Agencia extends Component {
@@ -51,3 +52,5 @@ export default class Agencia extends Component {
     );
   }
 }
+
+*/

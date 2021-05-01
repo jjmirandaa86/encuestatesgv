@@ -12,7 +12,9 @@ export default class Funcionario extends Component {
           <Form.Control as="select" onChange={this.metodoFuncionario}>
             <option></option>
             {this.state.datoFuncionario.map((el) => (
-              <option value={el.idFuncionario}>{el.name}</option>
+              <option key={el.idFuncionario} value={el.idFuncionario}>
+                {el.name}
+              </option>
             ))}
           </Form.Control>
         </Form.Group>
@@ -20,7 +22,7 @@ export default class Funcionario extends Component {
         <Form.Group controlId="valorCorreo" class="valorCorreo">
           <Form.Label>Correo: * </Form.Label>
           <Form.Control as="select">
-            {this.state.funcionarioSeleccionado != 0
+            {this.state.funcionarioSeleccionado !== 0
               ? this.state.funcionarioSeleccionadoDatos.map((el) => (
                   <option value={el.correo}>{el.correo}</option>
                 ))
@@ -28,7 +30,7 @@ export default class Funcionario extends Component {
           </Form.Control>
         </Form.Group>
 
-        {this.state.funcionarioSeleccionado != 0 ? (
+        {this.state.funcionarioSeleccionado !== 0 ? (
           <Grid
             color_fondo={this.props.color_fondo}
             color_fondo_tabla={this.props.color_fondo_tabla}
