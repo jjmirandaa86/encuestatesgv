@@ -3,65 +3,73 @@ import Badge from "react-bootstrap/Badge";
 
 export default class FilaTabla extends Component {
   constructor(props) {
+    console.log("FilaTabla -> ========= constructor ============");
     super(props);
     this.state = {
-      ruta: this.props.e_ruta,
-      backup: this.props.e_backups,
-      sim: this.props.e_sim,
+      it_agencia: this.props.e_agencia,
+      it_ruta: this.props.e_ruta,
+      it_backup: this.props.e_backups,
+      it_sim: this.props.e_sim,
+      user_agencia: this.props.e_agencia,
+      user_ruta: this.props.e_ruta,
+      user_backup: this.props.e_backups,
+      user_sim: this.props.e_sim,
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
+    console.log("FilaTabla -> ========= handleChange ============");
     const name = e.target.name;
     const value = e.target.value;
-    console.log("Cambio" + name + value);
     this.setState({
       [name]: value,
     });
   }
-
   render(props) {
+    console.log("FilaTabla -> ========= Render ============");
     return (
       <>
-        <td>{this.props.agencia}</td>
-        <td>
+        <td className="agencia">{this.state.it_agencia}</td>
+        <td className="ruta">
           <input
             type="number"
-            id="ruta"
-            name="ruta"
-            value={this.state.ruta}
+            id="user_ruta"
+            name="user_ruta"
+            value={this.state.user_ruta}
             size={2}
             onChange={this.handleChange}
           />
           <Badge variant="success">
-            <h7>{this.props.e_ruta}</h7>
+            <h7>{this.state.it_ruta}</h7>
           </Badge>{" "}
         </td>
+
         <td>
           <input
             type="number"
-            id="backup"
-            name="backup"
-            value={this.state.backup}
+            id="user_backup"
+            name="user_backup"
+            value={this.state.user_backup}
             size={2}
             onChange={this.handleChange}
           />
           <Badge variant="success">
-            <h7>{this.props.e_backups}</h7>
+            <h7>{this.state.it_backup}</h7>
           </Badge>{" "}
         </td>
+
         <td>
           <input
             type="number"
-            id="sim"
-            name="sim"
-            value={this.state.sim}
+            id="user_sim"
+            name="user_sim"
+            value={this.state.user_sim}
             size={2}
             onChange={this.handleChange}
           />
           <Badge variant="success">
-            <h7>{this.props.e_sim}</h7>
+            <h7>{this.state.it_sim}</h7>
           </Badge>{" "}
         </td>
       </>

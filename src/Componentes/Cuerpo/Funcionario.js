@@ -7,7 +7,7 @@ export default class Funcionario extends Component {
     console.log("Funcionario -> ========= Render ============");
     return (
       <>
-        <Form.Group controlId="valorFuncionario" class="valorFuncionario">
+        <Form.Group controlId="valorFuncionario" className="valorFuncionario">
           <Form.Label>Funcionario: *</Form.Label>
           <Form.Control as="select" onChange={this.metodoFuncionario}>
             <option></option>
@@ -19,12 +19,14 @@ export default class Funcionario extends Component {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="valorCorreo" class="valorCorreo">
+        <Form.Group controlId="valorCorreo" className="valorCorreo">
           <Form.Label>Correo: * </Form.Label>
           <Form.Control as="select">
             {this.state.funcionarioSeleccionado !== 0
               ? this.state.funcionarioSeleccionadoDatos.map((el) => (
-                  <option value={el.correo}>{el.correo}</option>
+                  <option key={el.correo} value={el.correo}>
+                    {el.correo}
+                  </option>
                 ))
               : ""}
           </Form.Control>
@@ -33,9 +35,9 @@ export default class Funcionario extends Component {
         {this.state.funcionarioSeleccionado !== 0 ? (
           <Grid
             color_fondo={this.props.color_fondo}
+            tamano_titulo={this.props.tamano_titulo}
             color_fondo_tabla={this.props.color_fondo_tabla}
             color_letra={this.props.color_letra}
-            tamano_titulo={this.props.tamano_titulo}
             tamano_subtitulo={this.props.tamano_subtitulo}
             datos_agencias={this.props.datos_agencias}
             agencia_funcionario={this.state.funcionarioSeleccionadoAgencias}

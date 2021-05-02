@@ -4,11 +4,8 @@ import NoDisponible from "../NoDisponible/NoDisponible";
 import Cabecera from "../Cabecera/Cabecera";
 import Cuerpo from "../Cuerpo/Cuerpo";
 //Enviar parametros a los Hijos
-//import data from "../../Json/data.json";
 
 export default class Encuesta extends Component {
-  //true ? "SI" : "NO"
-
   render() {
     console.log("Encuesta -> ========= render ============");
     console.log("Encuesta valores: ");
@@ -126,6 +123,7 @@ export default class Encuesta extends Component {
 function getAbsolutePath() {
   console.log("Encuesta -> ========= getAbsolutePath ============");
   var loc = window.location;
+  /*
   console.log(loc);
   var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf("/") + 1);
   console.log(pathName);
@@ -134,4 +132,6 @@ function getAbsolutePath() {
     loc.href.length -
       ((loc.pathname + loc.search + loc.hash).length - pathName.length)
   );
+  */
+  return window.location;
 }

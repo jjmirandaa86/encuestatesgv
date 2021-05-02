@@ -5,11 +5,14 @@ import FilaTabla from "../Cuerpo/FilaTabla";
 
 export default class Grid extends Component {
   render(props) {
+    console.log("Grid -> ========= render ============");
     console.log("MANDO A LLAMAR A GRID");
     console.log("MANDO A LLAMAR A GRID");
     console.log("MANDO A LLAMAR A GRID");
     console.log("MANDO A LLAMAR A GRID");
     console.log(this.props.agencia_funcionario);
+    console.log(this.props.color_fondo);
+
     return (
       <>
         <Alert
@@ -26,6 +29,7 @@ export default class Grid extends Component {
           hover
           responsive
           variant={this.props.color_fondo_tabla}
+          className="tabla-Agencias"
         >
           <thead>
             <tr>
@@ -39,7 +43,7 @@ export default class Grid extends Component {
             {this.state.dataAgencias.map((el) => (
               <tr key={el.name}>
                 <FilaTabla
-                  agencia={el.name}
+                  e_agencia={el.name}
                   e_ruta={el.route}
                   e_backups={el.backup}
                   e_sim={el.sim}
@@ -56,7 +60,10 @@ export default class Grid extends Component {
     console.log("Grid -> ========= Constructor ============");
     super(props);
     this.state = {
-      dataAgencias: {}, // this.extraeAgenciasXFuncionario( this.props.datos_agencias, this.props.agencia_funcionario ),
+      dataAgencias: this.extraeAgenciasXFuncionario(
+        this.props.datos_agencias,
+        this.props.agencia_funcionario
+      ),
     };
     this.metodoGrid = this.metodoGrid.bind(this);
   }

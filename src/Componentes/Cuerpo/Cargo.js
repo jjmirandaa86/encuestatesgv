@@ -9,7 +9,7 @@ export default class Cargo extends Component {
     console.log(this.props.datos_agencias);
     return (
       <>
-        <Form.Group controlId="valorCargo" class="valorCargo">
+        <Form.Group controlId="valorCargo" className="valorCargo">
           <Form.Label>Cargo: * </Form.Label>
           <Form.Control as="select" onChange={this.onChangeCargo}>
             <option></option>
@@ -20,6 +20,11 @@ export default class Cargo extends Component {
         </Form.Group>
         {this.state.funcionario ? (
           <Funcionario
+            color_fondo={this.props.color_fondo}
+            tamano_titulo={this.props.tamano_titulo}
+            color_fondo_tabla={this.props.color_fondo_tabla}
+            color_letra={this.props.color_letra}
+            tamano_subtitulo={this.props.tamano_subtitulo}
             datos_funcionario={this.props.datos_funcionarios}
             dato_Cargo={this.state.datoCargoValue} //this.handler
             datos_agencias={this.props.datos_agencias}
@@ -34,25 +39,6 @@ export default class Cargo extends Component {
   constructor(props) {
     console.log("Cargo -> ========= Constructor ============");
     super(props);
-    const x = [
-      {
-        idFuncionario: 1,
-        name: "Francisco Avalos",
-        position: "Gerente de Ventas Costa",
-        short_position: "GV",
-        correo: "favalos@cbc.co",
-        agencias: [1, 2, 3, 4, 5],
-      },
-      {
-        idFuncionario: 2,
-        name: "Diana Landucci",
-        position: "Gerente de Ventas Especiales",
-        short_position: "GV",
-        correo: "ldanducci@cbc.co",
-        agencias: [5, 6],
-      },
-    ];
-    console.log("Cargo" + x);
     console.log("Cargo" + this.props.datos_funcionarios);
     this.state = {
       //dataCargo: this.extraeCargosUnicos(x),

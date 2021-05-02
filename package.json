@@ -17,7 +17,7 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.1"
   },
-  
+  "homepage" : "http://10.10.10.18:8888/encuestatesalia/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

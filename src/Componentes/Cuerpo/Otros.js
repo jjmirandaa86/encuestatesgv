@@ -16,7 +16,7 @@ export default class Otros extends Component {
           </Alert.Heading>
         </Alert>
         <Container>
-          <Form.Group controlId="valorObservacion" class="valorObservacion">
+          <Form.Group controlId="valorObservacion" className="valorObservacion">
             <Form.Label>Observación:</Form.Label>
             <Form.Control placeholder="Escribe las observaciones que tengas para mejorar el servicio y/o alguna novedad." />
           </Form.Group>
