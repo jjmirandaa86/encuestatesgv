@@ -70,29 +70,36 @@ export default class Cuerpo extends Component {
     const getNovedad = document.getElementById("valorObservacion").value;
     const getEstrellas = 10;
     //Detalle
-    let materiales = [];
+    let agencias = [];
     document.querySelectorAll(".tabla-Agencias tbody tr").forEach(function (e) {
       let fila = {
-        codigo: e.querySelector(".agencia").innerText,
-        material: e.querySelector(".ruta").innerText,
+        agencia: e.querySelector(".agencia").innerText,
+        user_ruta: e.querySelector(".ruta input,select").value,
+        user_backup: e.querySelector(".backup input,select").value,
+        user_sim: e.querySelector(".sim input,select").value,
+        it_ruta: e.querySelector(".ruta").innerText,
+        it_backup: e.querySelector(".backup").innerText,
+        it_sim: e.querySelector(".sim").innerText,
       };
-      materiales.push(fila);
+      agencias.push(fila);
     });
 
+    //Agrego con un objeto todos los datos para enviar solo un objeto
     const datos = {
-      getFuncionario: getUsuario,
-      getCorreo: getCorreo,
-      getCargo: getCargo,
-      getNovedad: getNovedad,
-      getEstrellas: getEstrellas,
-      getAgencias: materiales,
+      fecha: fechaHora("F"),
+      hora: fechaHora("H"),
+      usuario: getUsuario,
+      correo: getCorreo,
+      cargo: getCargo,
+      novedad: getNovedad,
+      estrellas: getEstrellas,
+      respuesta: agencias,
     };
 
-    console.log(datos);
-    console.log(JSON.stringify(datos));
-
-    (async (datos) => {
+    (async () => {
       try {
+        console.log(JSON.stringify(datos));
+
         var init = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -100,6 +107,7 @@ export default class Cuerpo extends Component {
         };
         let url = getAbsolutePath() + "Php/saveData.php";
         var response = await fetch(url, init);
+        console.log(response);
       } catch (err) {
         console.log("Error al realizar la petición AJAX: " + err.message);
       }
@@ -127,4 +135,23 @@ function getAbsolutePath() {
   );
   */
   return window.location;
+}
+
+function fechaHora(tipo) {
+  const MyDate = new Date(); //var MyDate = new Date();
+  var MyDateString;
+  if (tipo === "F") {
+    MyDateString =
+      ("0" + MyDate.getDate()).slice(-2) +
+      "." +
+      ("0" + (MyDate.getMonth() + 1)).slice(-2) +
+      "." +
+      MyDate.getFullYear();
+    return MyDateString;
+  }
+  if (tipo === "H") {
+    return (
+      MyDate.getHours() + ":" + MyDate.getMinutes() + ":" + MyDate.getSeconds()
+    );
+  }
 }

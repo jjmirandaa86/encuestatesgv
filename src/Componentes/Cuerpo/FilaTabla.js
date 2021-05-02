@@ -45,7 +45,7 @@ export default class FilaTabla extends Component {
           </Badge>{" "}
         </td>
 
-        <td>
+        <td className="backup">
           <input
             type="number"
             id="user_backup"
@@ -59,7 +59,7 @@ export default class FilaTabla extends Component {
           </Badge>{" "}
         </td>
 
-        <td>
+        <td className="sim">
           <input
             type="number"
             id="user_sim"
