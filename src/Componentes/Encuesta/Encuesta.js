@@ -8,9 +8,6 @@ import Cuerpo from "../Cuerpo/Cuerpo";
 export default class Encuesta extends Component {
   render() {
     console.log("Encuesta -> ========= render ============");
-    console.log("Encuesta valores: ");
-    console.log(this.state.datos_funcionarios);
-
     return (
       <>
         {this.state.disponible ? (
@@ -68,6 +65,7 @@ export default class Encuesta extends Component {
     super(props);
     this.state = {
       disponible: false,
+      titulo_pagina_web: "",
       color_fondo: "",
       tamano_titulo: "h2",
       tamano_subtitulo: "h4",
@@ -90,14 +88,15 @@ export default class Encuesta extends Component {
 
   componentDidMount(e) {
     console.log("Encuesta -> ========= componentDidMount ============");
+
     let url = getAbsolutePath() + "Json/data.json";
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         //Asigno a las varibales de State
         this.setState({
           disponible: json.disponible,
+          titulo_pagina_web: json.titulo_pagina_web,
           color_fondo: json.color_fondo,
           tamano_titulo: json.tamano_titulo,
           tamano_subtitulo: json.tamano_subtitulo,
@@ -116,6 +115,8 @@ export default class Encuesta extends Component {
           datos_funcionarios: json.funcionarios,
           datos_agencias: json.agencias,
         });
+        //Pongo el titulo a la pagina Web
+        document.title = json.titulo_pagina_web;
       });
   }
 }

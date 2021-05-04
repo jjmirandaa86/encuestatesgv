@@ -6,13 +6,6 @@ import FilaTabla from "../Cuerpo/FilaTabla";
 export default class Grid extends Component {
   render(props) {
     console.log("Grid -> ========= render ============");
-    console.log("MANDO A LLAMAR A GRID");
-    console.log("MANDO A LLAMAR A GRID");
-    console.log("MANDO A LLAMAR A GRID");
-    console.log("MANDO A LLAMAR A GRID");
-    console.log(this.props.agencia_funcionario);
-    console.log(this.props.color_fondo);
-
     return (
       <>
         <Alert
@@ -83,16 +76,12 @@ export default class Grid extends Component {
 
   extraeAgenciasXFuncionario(datos_agencias, agencia_funcionario) {
     console.log("Grid -> =========== extraeAgenciasXFuncionario ============");
-    console.log(datos_agencias);
-    console.log("Valores a validar: " + agencia_funcionario.length);
     let arrayAgencias = datos_agencias.filter((vectorResultado) => {
-      console.log(vectorResultado.idAgencia + " - " + vectorResultado.name);
       if (!agencia_funcionario.includes(vectorResultado.idAgencia))
         return false;
       // Si no se pudo dividir por ninguno de los de arriba, sí es primo
       return vectorResultado;
     });
-    console.log(arrayAgencias);
     return arrayAgencias;
   }
 }

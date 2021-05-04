@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/encuestatesalia/static/css/main.4bc626fa.chunk.css",
+    "main.js": "/encuestatesalia/static/js/main.84ede42f.chunk.js",
+    "main.js.map": "/encuestatesalia/static/js/main.84ede42f.chunk.js.map",
+    "runtime-main.js": "/encuestatesalia/static/js/runtime-main.9d384443.js",
+    "runtime-main.js.map": "/encuestatesalia/static/js/runtime-main.9d384443.js.map",
+    "static/css/2.379a8125.chunk.css": "/encuestatesalia/static/css/2.379a8125.chunk.css",
+    "static/js/2.92368cdd.chunk.js": "/encuestatesalia/static/js/2.92368cdd.chunk.js",
+    "static/js/2.92368cdd.chunk.js.map": "/encuestatesalia/static/js/2.92368cdd.chunk.js.map",
+    "static/js/3.a125d8d8.chunk.js": "/encuestatesalia/static/js/3.a125d8d8.chunk.js",
+    "static/js/3.a125d8d8.chunk.js.map": "/encuestatesalia/static/js/3.a125d8d8.chunk.js.map",
+    "index.html": "/encuestatesalia/index.html",
+    "static/css/2.379a8125.chunk.css.map": "/encuestatesalia/static/css/2.379a8125.chunk.css.map",
+    "static/css/main.4bc626fa.chunk.css.map": "/encuestatesalia/static/css/main.4bc626fa.chunk.css.map",
+    "static/js/2.92368cdd.chunk.js.LICENSE.txt": "/encuestatesalia/static/js/2.92368cdd.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9d384443.js",
+    "static/css/2.379a8125.chunk.css",
+    "static/js/2.92368cdd.chunk.js",
+    "static/css/main.4bc626fa.chunk.css",
+    "static/js/main.84ede42f.chunk.js"
+  ]
+}

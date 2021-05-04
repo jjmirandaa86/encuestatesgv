@@ -3,52 +3,70 @@ import Cargo from "../../Componentes/Cuerpo/Cargo";
 import Otros from "../../Componentes/Cuerpo/Otros";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Modal from "react-bootstrap/Modal";
+
 import Grid from "../../Componentes/Cuerpo/Grid";
 
 export default class Cuerpo extends Component {
   render(props) {
     console.log("Cuerpo -> ========= render ============");
-    console.log("Valores recibidos de Encuesta");
-    console.log(this.props.datos_funcionarios);
-    console.log(this.props.datos_agencias);
-
     return (
       <>
-        <form
-          id="enviaFormulario"
-          action={getAbsolutePath() + "Php/saveData.php"}
-          onSubmit={this.handleSubmit}
-        >
-          <Alert
-            variant={this.props.color_fondo}
-            text={this.props.color_fondo === "light" ? "dark" : "white"}
-          >
-            <Alert.Heading as={this.props.tamano_titulo}>
-              Datos del funcionario:
-            </Alert.Heading>
-          </Alert>
-          <Cargo
-            color_fondo={this.props.color_fondo}
-            tamano_titulo={this.props.tamano_titulo}
-            color_fondo_tabla={this.props.color_fondo_tabla}
-            color_letra={this.props.color_letra}
-            tamano_subtitulo={this.props.tamano_subtitulo}
-            datos_funcionarios={this.props.datos_funcionarios}
-            datos_agencias={this.props.datos_agencias}
-          />
+        {this.state.formularioRespuesta ? (
+          <>
+            <form
+              id="enviaFormulario"
+              action={getAbsolutePath() + "Php/saveData.php"}
+              onSubmit={this.handleSubmit}
+            >
+              <Alert
+                variant={this.props.color_fondo}
+                text={this.props.color_fondo === "light" ? "dark" : "white"}
+              >
+                <Alert.Heading as={this.props.tamano_titulo}>
+                  Datos del funcionario:
+                </Alert.Heading>
+              </Alert>
+              <Cargo
+                color_fondo={this.props.color_fondo}
+                tamano_titulo={this.props.tamano_titulo}
+                color_fondo_tabla={this.props.color_fondo_tabla}
+                color_letra={this.props.color_letra}
+                tamano_subtitulo={this.props.tamano_subtitulo}
+                datos_funcionarios={this.props.datos_funcionarios}
+                datos_agencias={this.props.datos_agencias}
+              />
 
-          <Otros
-            color_fondo={this.props.color_fondo}
-            color_fondo_tabla={this.props.color_fondo_tabla}
-            color_letra={this.props.color_letra}
-            tamano_titulo={this.props.tamano_titulo}
-            tamano_subtitulo={this.props.tamano_subtitulo}
-          />
-          <br />
-          <Button variant={this.props.color_fondo} onClick={this.guardar}>
-            Enviar
-          </Button>
-        </form>
+              <Otros
+                color_fondo={this.props.color_fondo}
+                color_fondo_tabla={this.props.color_fondo_tabla}
+                color_letra={this.props.color_letra}
+                tamano_titulo={this.props.tamano_titulo}
+                tamano_subtitulo={this.props.tamano_subtitulo}
+              />
+              <br />
+              <Button variant={this.props.color_fondo} onClick={this.guardar}>
+                Enviar
+              </Button>
+            </form>
+          </>
+        ) : (
+          <>
+            <Modal.Dialog>
+              <Modal.Header>
+                <Modal.Title>Mensaje</Modal.Title>
+              </Modal.Header>
+
+              <Modal.Body>
+                <p>Registro Almacenado con Exito.</p>
+              </Modal.Body>
+
+              <Modal.Footer>
+                <Button variant="secondary">Otra Respuesta</Button>
+              </Modal.Footer>
+            </Modal.Dialog>
+          </>
+        )}
       </>
     );
   }
@@ -56,19 +74,36 @@ export default class Cuerpo extends Component {
   constructor(props) {
     console.log("Cuerpo -> ========= Constructor ============");
     super(props);
+    this.state = {
+      formularioRespuesta: true,
+      tituloRespuesta: "Mensaje",
+      cuerpoRespuesta: "",
+    };
   }
 
   guardar(e) {
     console.log("Cuerpo -> ========= guardar ============");
-
     //Cabecera
+    const getCargo = document.getElementById("valorCargo").value;
+    if (getCargo === "") {
+      alert("Debes seleccionar un cargo.");
+      return false;
+    }
     const getUsuario = document.getElementById("valorFuncionario").options[
       document.getElementById("valorFuncionario").selectedIndex
     ].text;
+    if (getUsuario === "") {
+      alert("Debes seleccionar un Usuario.");
+      return false;
+    }
     const getCorreo = document.getElementById("valorCorreo").value;
-    const getCargo = document.getElementById("valorCargo").value;
+    if (getCorreo === "") {
+      alert("Debes seleccionar un Correo.");
+      return false;
+    }
     const getNovedad = document.getElementById("valorObservacion").value;
     const getEstrellas = 10;
+
     //Detalle
     let agencias = [];
     document.querySelectorAll(".tabla-Agencias tbody tr").forEach(function (e) {
@@ -98,8 +133,6 @@ export default class Cuerpo extends Component {
 
     (async () => {
       try {
-        console.log(JSON.stringify(datos));
-
         var init = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -107,11 +140,25 @@ export default class Cuerpo extends Component {
         };
         let url = getAbsolutePath() + "Php/saveData.php";
         var response = await fetch(url, init);
-        console.log(response);
+
+        if (response.ok) {
+          this.cambiaState();
+        } else {
+          throw new Error(response.statusText);
+        }
       } catch (err) {
         console.log("Error al realizar la petición AJAX: " + err.message);
       }
     })();
+  }
+
+  cambiaState() {
+    console.log("Cuerpo -> ========= cambiaState ============");
+    this.setState({
+      disponible: true,
+      tituloRespuesta: "Mensaje",
+      cuerpoRespuesta: "Registro guardado con exito.",
+    });
   }
 
   cargo(e) {
@@ -154,4 +201,17 @@ function fechaHora(tipo) {
       MyDate.getHours() + ":" + MyDate.getMinutes() + ":" + MyDate.getSeconds()
     );
   }
+}
+
+function MensajeExito(color_fondo, tamano_titulo) {
+  return (
+    <Alert
+      variant={color_fondo}
+      text={color_fondo === "light" ? "dark" : "white"}
+    >
+      <Alert.Heading as={tamano_titulo}>
+        Su respuesta ha sido almacenada con exito. Muchas gracias.
+      </Alert.Heading>
+    </Alert>
+  );
 }

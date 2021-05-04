@@ -5,8 +5,6 @@ import Funcionario from "../../Componentes/Cuerpo/Funcionario";
 export default class Cargo extends Component {
   render(props) {
     console.log("Cargo -> ========= render ============");
-    console.log(this.props.datos_funcionarios);
-    console.log(this.props.datos_agencias);
     return (
       <>
         <Form.Group controlId="valorCargo" className="valorCargo">
@@ -39,7 +37,6 @@ export default class Cargo extends Component {
   constructor(props) {
     console.log("Cargo -> ========= Constructor ============");
     super(props);
-    console.log("Cargo" + this.props.datos_funcionarios);
     this.state = {
       //dataCargo: this.extraeCargosUnicos(x),
       dataCargo: this.extraeCargosUnicos(this.props.datos_funcionarios),
@@ -51,7 +48,6 @@ export default class Cargo extends Component {
 
   onChangeCargo(e) {
     console.log("Cargo -> =========== metodoCargo ============");
-    console.log("   -> " + e.target.value);
     //this.setState({ dataCargo: e.target.value, });
     if (document.getElementsByTagName("valorCargo").value !== "") {
       this.setState({
@@ -63,17 +59,13 @@ export default class Cargo extends Component {
 
   extraeCargosUnicos(datos_funcionario) {
     console.log("Cargo -> =========== extraeCargosUnicos ============");
-    console.log(datos_funcionario);
     const varBuscar = [];
-    console.log("Typo de dato es: " + typeof datos_funcionario);
-    console.log("Valores a validar: " + datos_funcionario.length);
     let arrayFuncionario = datos_funcionario.filter((vectorResultado) => {
       if (!varBuscar.includes(vectorResultado.short_position)) {
         varBuscar.push(vectorResultado.short_position);
         return false;
       }
     });
-    console.log(varBuscar);
     return varBuscar.sort();
   }
 }

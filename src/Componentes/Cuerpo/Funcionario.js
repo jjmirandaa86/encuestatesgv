@@ -81,18 +81,19 @@ export default class Funcionario extends Component {
     console.log(
       "Funcionario -> ========= buscaFuncionariosXCargo ============"
     );
-    console.log(datos_funcionario);
-    console.log(dato_Cargo);
+
     const varBuscar = [];
     varBuscar.push(dato_Cargo);
-    let arrayFuncionario = datos_funcionario.filter((vectorResultado) => {
-      console.log(
-        vectorResultado.short_position + " - " + vectorResultado.name
-      );
-      if (!varBuscar.includes(vectorResultado.short_position)) return false;
-      return vectorResultado;
-    });
-    console.log(arrayFuncionario);
+    let arrayFuncionario = datos_funcionario
+      .filter((vectorResultado) => {
+        if (!varBuscar.includes(vectorResultado.short_position)) return false;
+        return vectorResultado;
+      })
+      .sort((a, b) => {
+        if (a.name < b.name) return -1;
+        else if (a.name > b.name) return 1;
+        return 0;
+      });
     return arrayFuncionario;
   }
 
@@ -100,8 +101,6 @@ export default class Funcionario extends Component {
     console.log(
       "Funcionario -> ========= buscaCorreoXFuncionario ============"
     );
-    console.log(datos_funcionario);
-    console.log(datoIdFuncionario);
     const varBuscar = [];
     varBuscar.push(parseInt(datoIdFuncionario));
     let arrayFuncionario = datos_funcionario.filter((vectorResultado) => {
@@ -119,7 +118,6 @@ export default class Funcionario extends Component {
       }
       return vectorResultado;
     });
-    console.log(arrayFuncionario);
     return arrayFuncionario;
   }
 
