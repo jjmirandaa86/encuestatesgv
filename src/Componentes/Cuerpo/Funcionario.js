@@ -104,13 +104,6 @@ export default class Funcionario extends Component {
     const varBuscar = [];
     varBuscar.push(parseInt(datoIdFuncionario));
     let arrayFuncionario = datos_funcionario.filter((vectorResultado) => {
-      console.log(
-        vectorResultado.idFuncionario +
-          " - " +
-          vectorResultado.short_position +
-          " - " +
-          vectorResultado.name
-      );
       if (!varBuscar.includes(vectorResultado.idFuncionario)) {
         return false;
       } else {
@@ -128,6 +121,5 @@ export default class Funcionario extends Component {
     this.setState({
       funcionarioSeleccionadoAgencias: datos_agencias,
     });
-    console.log(datos_agencias);
   }
 }

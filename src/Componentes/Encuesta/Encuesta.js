@@ -8,6 +8,7 @@ import Cuerpo from "../Cuerpo/Cuerpo";
 export default class Encuesta extends Component {
   render() {
     console.log("Encuesta -> ========= render ============");
+    console.log("ultimo cambio 05.05.2021 17:52 - Jeff Miranda ");
     return (
       <>
         {this.state.disponible ? (

@@ -53,16 +53,16 @@ export default class Cuerpo extends Component {
         ) : (
           <>
             <Modal.Dialog>
-              <Modal.Header>
+              <Modal.Header variant={this.props.color_fondo}>
                 <Modal.Title>Mensaje</Modal.Title>
               </Modal.Header>
-
               <Modal.Body>
                 <p>Registro Almacenado con Exito.</p>
               </Modal.Body>
-
               <Modal.Footer>
-                <Button variant="secondary">Otra Respuesta</Button>
+                <Button variant={this.props.color_fondo} onClick={this.reload}>
+                  Otra Respuesta
+                </Button>
               </Modal.Footer>
             </Modal.Dialog>
           </>
@@ -79,6 +79,7 @@ export default class Cuerpo extends Component {
       tituloRespuesta: "Mensaje",
       cuerpoRespuesta: "",
     };
+    this.guardar = this.guardar.bind(this);
   }
 
   guardar(e) {
@@ -140,10 +141,19 @@ export default class Cuerpo extends Component {
         };
         let url = getAbsolutePath() + "Php/saveData.php";
         var response = await fetch(url, init);
-
         if (response.ok) {
-          this.cambiaState();
+          alert("Entro" + response.ok);
+          this.setState({
+            formularioRespuesta: false,
+            tituloRespuesta: "Mensaje",
+            cuerpoRespuesta: "Registro guardado con exito.",
+          });
         } else {
+          this.setState({
+            formularioRespuesta: false,
+            tituloRespuesta: "Mensaje",
+            cuerpoRespuesta: "Ocurrio un erro al almacenar el registro.",
+          });
           throw new Error(response.statusText);
         }
       } catch (err) {
@@ -152,20 +162,16 @@ export default class Cuerpo extends Component {
     })();
   }
 
-  cambiaState() {
-    console.log("Cuerpo -> ========= cambiaState ============");
-    this.setState({
-      disponible: true,
-      tituloRespuesta: "Mensaje",
-      cuerpoRespuesta: "Registro guardado con exito.",
-    });
-  }
-
   cargo(e) {
     console.log("Cuerpo -> ========= cargo ============");
     const cargo = document.getElementById("valorCargo").value;
     return cargo;
   }
+
+  reload = () => {
+    //window.location.reload(true);
+    console.log("se recarga pagina");
+  };
 }
 
 function getAbsolutePath() {
@@ -201,17 +207,4 @@ function fechaHora(tipo) {
       MyDate.getHours() + ":" + MyDate.getMinutes() + ":" + MyDate.getSeconds()
     );
   }
-}
-
-function MensajeExito(color_fondo, tamano_titulo) {
-  return (
-    <Alert
-      variant={color_fondo}
-      text={color_fondo === "light" ? "dark" : "white"}
-    >
-      <Alert.Heading as={tamano_titulo}>
-        Su respuesta ha sido almacenada con exito. Muchas gracias.
-      </Alert.Heading>
-    </Alert>
-  );
 }
